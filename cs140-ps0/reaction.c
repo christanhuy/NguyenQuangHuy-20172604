@@ -38,7 +38,8 @@ reaction_o(struct reaction *reaction)
 	while(reaction->h<2){
 		cond_wait(&reaction->h_exist,&reaction->lock);
 	}
-	cond_broadcast(&reaction->o_exist,&reaction->lock);
+	cond_signal(&reaction->o_exist,&reaction->lock);
+	cond_signal(&reaction->o_exist,&reaction->lock);
 	reaction->h -=2;
 	make_water();
 	lock_release(&reaction->lock);
